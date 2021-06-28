@@ -13,13 +13,13 @@ async function loadCoin() {
   }
 
   else {
-    const response = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/fibonacciretracement?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseTwo = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/breakaway?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseThree = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/rsi?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseFour = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/supertrend?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseFive = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/avgprice?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseSix = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/3whitesoldiers?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const macdResponse = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/macd?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const response = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/fibonacciretracement?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const responseTwo = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/breakaway?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const responseThree = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/rsi?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const responseFour = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/supertrend?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const responseFive = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/avgprice?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const responseSix = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/3whitesoldiers?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const macdResponse = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/macd?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
     const macdData = await macdResponse.json()
     const dataSix = await responseSix.json()
     const dataFive = await responseFive.json()
@@ -144,9 +144,9 @@ function createTable(x, b, c, supertrend, price, whiteSoldier , macd) {
 
 
 async function loadPivot() {
-  const responseSeven = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/candle?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=1d&backtrack=1`)
+  const responseSeven = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/candle?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=1d&backtrack=1`)
   const dataSeven = await responseSeven.json()
-  const priceResponse = await fetch(`https://technicalcal.herokuapp.com/https://api.taapi.io/avgprice?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+  const priceResponse = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/avgprice?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
   const price = await priceResponse.json()
   displayCandleDetails(dataSeven, price)
 
