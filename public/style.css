@@ -187,6 +187,7 @@ input:focus , select:focus {
     }
 
     .coin{
+        margin-top: 20px;
         position: static;
     }
 }

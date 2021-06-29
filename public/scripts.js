@@ -9,6 +9,7 @@ async function loadCoin() {
 
   if (coinName.value == '') {
     alert("Please Enter a Coin Name")
+    location.reload()
 
   }
 
@@ -30,6 +31,7 @@ async function loadCoin() {
 
     if (data.errors) {
       alert("Please Enter Valid Coin Name")
+      location.reload()
     } else {
       createTable(data, dataTwo, dataThree, dataFour, dataFive, dataSix, macdData )
 
