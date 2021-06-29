@@ -23,7 +23,7 @@ body{
 }
 
 .coin-section{
-    min-height: 800px;
+    min-height: 700px;
     display: flex;
     align-items: center;
 }
