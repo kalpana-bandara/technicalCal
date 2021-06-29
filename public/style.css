@@ -132,7 +132,7 @@ body{
     color: white;
     font-weight: 500;
     background-color: #F34141;
-    margin-left: 33%;
+    margin-left: 35%;
     border: 0;
     padding: 10px 20px;
     cursor: default !important;
@@ -178,6 +178,9 @@ input:focus , select:focus {
 
 
 @media screen and (max-width: 600px){
+    .details-cards{
+        padding: 15% 0 15% 0;
+    }
     .card-details{
         display: grid;
         grid-template-columns: 1fr;
