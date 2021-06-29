@@ -99,7 +99,7 @@ body{
 
 .details-cards{
     position: relative;
-    padding: 10% 0;
+    padding: 5% 0;
     display: none;
 }
 
@@ -115,6 +115,12 @@ body{
     grid-template-columns: 2fr 1fr;
     grid-row-gap: 50px;
     
+}
+@media screen and (max-width: 600px){
+    .card-details{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
 }
 
 .coin{
