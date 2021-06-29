@@ -116,12 +116,7 @@ body{
     grid-row-gap: 50px;
     
 }
-@media screen and (max-width: 600px){
-    .card-details{
-        display: grid;
-        grid-template-columns: 1fr;
-    }
-}
+
 
 .coin{
     text-align: center;
@@ -179,4 +174,16 @@ input:focus , select:focus {
     background-color: #79A3B1 !important;
     border-color: #fff !important;
     color: #fff !important;
+}
+
+
+@media screen and (max-width: 600px){
+    .card-details{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .coin{
+        position: static;
+    }
 }
