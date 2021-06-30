@@ -33,7 +33,7 @@ async function loadCoin() {
       alert("Please Enter Valid Coin Name")
       location.reload()
     } else {
-      createTable(data, dataTwo, dataThree, dataFour, dataFive, dataSix, macdData )
+      createTable(data, dataTwo, dataThree, dataFour, dataFive, dataSix, macdData)
 
     }
 
@@ -43,38 +43,39 @@ async function loadCoin() {
 }
 
 
-function createTable(x, b, c, supertrend, price, whiteSoldier , macd) {
+function createTable(x, b, c, supertrend, price, whiteSoldier, macd) {
 
   let cross
 
-    if(macd.valueMACD > 0 && macd.valueMACDSignal > 0){
-      if(macd.valueMACD > macd.valueMACDSignal){
-        cross = "Crossed Upwards"
-      }else if(macd.valueMACD < macd.valueMACDSignal){
-        cross = "Crossed Downwards"
-      }
-    }else if(macd.valueMACD < 0 && macd.valueMACDSignal < 0){
-      if(macd.valueMACD < macd.valueMACDSignal){
-        cross = "Crossed Downwards"
-      }else if(macd.valueMACD > macd.valueMACDSignal){
-        cross = "Crossed Upwards"
-      }
-    }else{
-      cross = "Neutral"
+  if (macd.valueMACD > 0 && macd.valueMACDSignal > 0) {
+    if (macd.valueMACD > macd.valueMACDSignal) {
+      cross = "Crossed Upwards"
+    } else if (macd.valueMACD < macd.valueMACDSignal) {
+      cross = "Crossed Downwards"
     }
-
+  } else if (macd.valueMACD < 0 && macd.valueMACDSignal < 0) {
+    if (macd.valueMACD < macd.valueMACDSignal) {
+      cross = "Crossed Downwards"
+    } else if (macd.valueMACD > macd.valueMACDSignal) {
+      cross = "Crossed Upwards"
+    }
+  } else {
+    cross = "Neutral"
+  }
 
   let guess
+
   if (c.value >= 70) {
     guess = "Oversold!"
   } else if (c.value <= 30) {
     guess = "Overbought!"
-  } else if (c.value > 50) {
-    guess = "Uptrend"
-  } else if (c.value < 50) {
-    guess = "Downtrend"
+  } else if(c.value>50 && c.value<56){
+    guess = "Possible Downtrend"
+  }else if(c.value<50 && c.value>45){
+    guess = "Possible Uptrend"
   }
-
+  
+  
   if (b.value == 0) {
     b.value = `No `
   } else if (b.value == 1) {
@@ -83,9 +84,9 @@ function createTable(x, b, c, supertrend, price, whiteSoldier , macd) {
 
 
   let bullOrBear
-  if(x.value< price.value){
+  if (x.value < price.value) {
     bullOrBear = `<li style = "color:green;"><b>Price is  Above 0.618</b></li>`
-  }else{
+  } else {
     bullOrBear = `<li style = "color:red;"><b>Price is  Below 0.618</b></li>`
   }
 
@@ -97,7 +98,7 @@ function createTable(x, b, c, supertrend, price, whiteSoldier , macd) {
           <div class="card-header c-header">Technical Details</div>
           <div class="card-body c-body">
               <p><b>Trend :</b> <span style="font-weight: 300;">${x.trend} <span></p>
-              <p><b>RSI :</b> <span style="font-weight: 300;">${(c.value).toFixed(2)} <span></p>
+              <p><b>RSI :</b> <span style="font-weight: 300;">${(c.value).toFixed(2)}</span><span id="rsi"> ${guess} </span></p>
               <p><b>MACD :</b> <span style="font-weight: 300;">${cross} <span></p>
 
           </div>
@@ -137,9 +138,15 @@ function createTable(x, b, c, supertrend, price, whiteSoldier , macd) {
 <div class="coin">
   <h1>${(coinName.value).toUpperCase()}</h1>
   <h2>${(price.value).toFixed(3)}</h2>
+  <p style="cursor:pointer" onClick="location.reload()">Analyze another coin</p>
 </div>
 
     `
+  if(guess == "Possible Uptrend"){
+    document.getElementById("rsi").style.color = "Green";
+  }else if(guess== "Possible Downtrend"){
+    document.getElementById("rsi").style.color = "Red";
+  }
   let pivotButton = document.getElementById("pivotButton")
   pivotButton.addEventListener("click", loadPivot)
 }
