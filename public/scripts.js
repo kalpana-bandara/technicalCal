@@ -4,9 +4,20 @@ let button = document.getElementById("button")
 const secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthbHBhbmFiYW5kYXJhLmluZm9AZ21haWwuY29tIiwiaWF0IjoxNjI0MjExNDA4LCJleHAiOjc5MzE0MTE0MDh9.ZeYhfPHZNV5gTrSQGmLDsidbXRBAQX76EIvdI4zGMIQ"
 
 button.addEventListener("click", ()=>{
+  generateQuote()
   loadCoin()
-  document.getElementById("form").insertAdjacentHTML('beforeend', '<p style= "color:#fff; text-align:center; margin-top:20px;">Please Wait While Loading</p>')
+  
+  
 })
+
+async function generateQuote(){
+  const quoteResponse = await fetch("https://api.quotable.io/random?tags=technology&minLength=120&maxLength=130")
+  const quoteData = await quoteResponse.json()
+  document.getElementById("form").insertAdjacentHTML('beforeend', `
+  <p style="text-align:center; color: white; margin-top:20px; font-size: 16px;">Loading..Please Wait<br><span style = "font-size:18px; margin-top:10px;">${quoteData.content}</span></p>
+  `)
+
+}
 
 async function loadCoin() {
 
@@ -48,7 +59,7 @@ async function loadCoin() {
 }
 
 
-function createTable(x, b, c, supertrend, price, whiteSoldier, macd, ema) {
+function createTable(x, b, c, supertrend, price, macd, ema) {
 
   let emaValue
   if(price.value < ema.value){
