@@ -220,7 +220,7 @@ function displayCandleDetails(candleprev, cPrice) {
 
   pivotShow.insertAdjacentHTML("afterend", opinion)
 
-
+ pivotButton.removeEventListener('click', loadPivot)
 }
 
 
