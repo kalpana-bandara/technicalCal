@@ -3,7 +3,10 @@ let time = document.getElementById("time")
 let button = document.getElementById("button")
 const secret = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthbHBhbmFiYW5kYXJhLmluZm9AZ21haWwuY29tIiwiaWF0IjoxNjI0MjExNDA4LCJleHAiOjc5MzE0MTE0MDh9.ZeYhfPHZNV5gTrSQGmLDsidbXRBAQX76EIvdI4zGMIQ"
 
-button.addEventListener("click", loadCoin)
+button.addEventListener("click", ()=>{
+  loadCoin()
+  document.getElementById("form").insertAdjacentHTML('beforeend', '<p style= "color:#fff; text-align:center; margin-top:20px;">Please Wait While Loading</p>')
+})
 
 async function loadCoin() {
 
@@ -21,6 +24,8 @@ async function loadCoin() {
     const responseFive = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/avgprice?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
     const responseSix = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/3whitesoldiers?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
     const macdResponse = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/macd?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const emaResponse = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/ema?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}&optInTimePeriod=200`)
+    const emaData = await emaResponse.json()
     const macdData = await macdResponse.json()
     const dataSix = await responseSix.json()
     const dataFive = await responseFive.json()
@@ -33,7 +38,7 @@ async function loadCoin() {
       alert("Please Enter Valid Coin Name")
       location.reload()
     } else {
-      createTable(data, dataTwo, dataThree, dataFour, dataFive, dataSix, macdData)
+      createTable(data, dataTwo, dataThree, dataFour, dataFive, dataSix, macdData, emaData)
 
     }
 
@@ -43,7 +48,14 @@ async function loadCoin() {
 }
 
 
-function createTable(x, b, c, supertrend, price, whiteSoldier, macd) {
+function createTable(x, b, c, supertrend, price, whiteSoldier, macd, ema) {
+
+  let emaValue
+  if(price.value < ema.value){
+    emaValue = "Price below 200EMA"
+  }else if(price.value > ema.value){
+    emaValue = "Price above 200EMA"
+  }
 
   let cross
 
@@ -73,6 +85,10 @@ function createTable(x, b, c, supertrend, price, whiteSoldier, macd) {
     guess = "Possible Downtrend"
   }else if(c.value<50 && c.value>45){
     guess = "Possible Uptrend"
+  }else if(c.value<45){
+    guess = "Downtrending"
+  }else if(c.value>55){
+    guess ="uptrending"
   }
   
   
@@ -100,6 +116,8 @@ function createTable(x, b, c, supertrend, price, whiteSoldier, macd) {
               <p><b>Trend :</b> <span style="font-weight: 300;">${x.trend} <span></p>
               <p><b>RSI :</b> <span style="font-weight: 300;">${(c.value).toFixed(2)}</span><span id="rsi"> ${guess} </span></p>
               <p><b>MACD :</b> <span style="font-weight: 300;">${cross} <span></p>
+              <p><b>EMA :</b> <span style="font-weight: 300;">${emaValue} <span></p>
+
 
           </div>
       </div>
