@@ -14,7 +14,7 @@ async function generateQuote(){
   const quoteResponse = await fetch("https://api.quotable.io/random?tags=technology&minLength=120&maxLength=130")
   const quoteData = await quoteResponse.json()
   document.getElementById("form").insertAdjacentHTML('beforeend', `
-  <p style="text-align:center; color: white; margin-top:20px; font-size: 16px;">Loading..Please Wait<br><span style = "font-size:18px; margin-top:10px;">${quoteData.content}</span></p>
+  <p style="text-align:center; color: white; margin-top:20px; margin-bottom:10px; font-size: 16px;">Loading..Please Wait<br><span style = "font-size:18px; margin-top:10px;">${quoteData.content}</span></p>
   `)
 
 }
