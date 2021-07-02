@@ -29,27 +29,24 @@ async function loadCoin() {
 
   else {
     const response = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/fibonacciretracement?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseTwo = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/breakaway?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    
     const responseThree = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/rsi?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
     const responseFour = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/supertrend?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseFive = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/avgprice?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
-    const responseSix = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/3whitesoldiers?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
+    const responseFive = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/avgprice?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`) 
     const macdResponse = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/macd?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}`)
     const emaResponse = await fetch(`https://shrouded-bayou-23618.herokuapp.com/https://api.taapi.io/ema?secret=${secret}&exchange=binance&symbol=${coinName.value}/USDT&interval=${time.value}&optInTimePeriod=200`)
     const emaData = await emaResponse.json()
     const macdData = await macdResponse.json()
-    const dataSix = await responseSix.json()
     const dataFive = await responseFive.json()
     const dataThree = await responseThree.json()
     const dataFour = await responseFour.json()
-    const dataTwo = await responseTwo.json()
     const data = await response.json()
 
     if (data.errors) {
       alert("Please Enter Valid Coin Name")
       location.reload()
     } else {
-      createTable(data, dataTwo, dataThree, dataFour, dataFive,macdData, emaData)
+      createTable(data,dataThree, dataFour, dataFive,macdData, emaData)
 
     }
 
@@ -59,7 +56,7 @@ async function loadCoin() {
 }
 
 
-function createTable(x, b, c, supertrend, price, macd, ema) {
+function createTable(x, c, supertrend, price, macd, ema) {
 
   let emaValue
   if(price.value < ema.value){
@@ -102,13 +99,6 @@ function createTable(x, b, c, supertrend, price, macd, ema) {
     guess ="uptrending"
   }
   
-  
-  if (b.value == 0) {
-    b.value = `No `
-  } else if (b.value == 1) {
-    b.value = `Yes`
-  }
-
 
   let bullOrBear
   if (x.value < price.value) {
